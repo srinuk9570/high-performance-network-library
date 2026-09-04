@@ -26,7 +26,8 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
     python3-pip \
     curl \
     llvm \
-    libboost-all-dev
+    libboost-all-dev \
+    libmysqlcppconn-dev
 
 echo "=========================================="
 echo " Environment setup completed successfully"
