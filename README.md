@@ -35,6 +35,7 @@ The project focuses on understanding and implementing low-level networking conce
 ## Architecture
 
 The networking stack is organized around a small set of reusable components:
+![High-Performance Network Library System Architecture](image/system_architecture_en1.png)
 
 ```text
                          Client Connections
