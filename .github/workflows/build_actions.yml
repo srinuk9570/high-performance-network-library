@@ -1,0 +1,43 @@
+name: Build & Test
+
+run-name: ${{ github.actor }} - Build and Test High-Performance Network Library
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  BuildAndTest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Repository Code
+        uses: actions/checkout@v4
+
+      - name: Install Environment
+        run: |
+          chmod +x ./setup/setup.sh
+          ./setup/setup.sh
+
+      - name: Start MySQL Server
+        run: |
+          sudo systemctl start mysql
+
+      - name: Setup MySQL Database
+        run: |
+          sudo mysql -u root -p"root" < ./setup/setup.sql
+
+      - name: Show CMake Version
+        run: cmake --version
+
+      - name: Configure
+        run: |
+          cmake -S . -B build
+
+      - name: Build
+        run: |
+          cmake --build build --parallel
+
+      - name: Test
+        run: |
+          ctest --test-dir build --output-on-failure
